@@ -7,6 +7,30 @@
 	<svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
 
 	<script>
+	 function countme(){
+
+		var mousedown_time;
+
+		function getTime(){
+			var date = new Date();
+			return date.getTime();
+		}
+
+		document.onmousedown = function(e){
+			mousedown_time = getTime();
+		}
+		document.onmouseup = function(e){
+			time_pressed = getTime() - mousedown_time;
+			console.log(time_pressed);
+			return(time_pressed);
+		}
+	}
+
+		//technically we don't even need the mousedown variable but we're leaving it there for now..
+
+
+
+
 	function Circle(cx, cy, html_id)
 	{
 		var html_id = html_id;
@@ -28,7 +52,7 @@
 			var circle = makeSVG('circle',
 				{ 	cx: this.info.cx,
 				  	cy: this.info.cy,
-				  	r:  10,
+				  	r:  50,
 				  	id: html_id,
 				  	style: "fill: black"
 				});
@@ -98,8 +122,10 @@
 	var playground = new PlayGround();
 	setInterval(playground.loop, 10);
 
+
+
 	document.onclick = function(e) {
-		console.log("Mouse postion on click: " + e.x,e.y);
+	
 		playground.createNewCircle(e.x,e.y);
 	}
 
