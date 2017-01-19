@@ -22,7 +22,7 @@
 		document.onmouseup = function(e){
 			time_pressed = getTime() - mousedown_time;
 			console.log(time_pressed);
-			return(time_pressed);
+
 		}
 	}
 
@@ -120,12 +120,13 @@
 	}
 
 	var playground = new PlayGround();
+
 	setInterval(playground.loop, 10);
 
-
-
+	document.onclick = countme();
+	console.log(e);
 	document.onclick = function(e) {
-	
+
 		playground.createNewCircle(e.x,e.y);
 	}
 
