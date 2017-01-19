@@ -11,7 +11,7 @@
 	{
 		var html_id = html_id;
 		this.info = { cx: cx,  cy: cy };
-		
+
 		//private function that generates a random number
 		var randomNumberBetween = function(min, max){
 			return Math.random()*(max-min) + min;
@@ -24,8 +24,8 @@
 				y: randomNumberBetween(-3,3)
 			}
 
-			//create a circle 
-			var circle = makeSVG('circle', 
+			//create a circle
+			var circle = makeSVG('circle',
 				{ 	cx: this.info.cx,
 				  	cy: this.info.cy,
 				  	r:  10,
@@ -34,17 +34,18 @@
 				});
 
 			document.getElementById('svg').appendChild(circle);
+
 		}
 
 		this.update = function(time){
 			var el = document.getElementById(html_id);
 
 			//see if the circle is going outside the browser. if it is, reverse the velocity
-			if( this.info.cx > document.body.clientWidth || this.info.cx < 0)
+			if( this.info.cx > document.body.clientWidth-20 || this.info.cx < 20)
 			{
 				this.info.velocity.x = this.info.velocity.x * -1;
 			}
-			if( this.info.cy > document.body.clientHeight || this.info.cy < 0)
+			if( this.info.cy > document.body.clientHeight-20 || this.info.cy < 20)
 			{
 				this.info.velocity.y = this.info.velocity.y * -1;
 			}
@@ -54,6 +55,8 @@
 
 			el.setAttribute("cx", this.info.cx);
 			el.setAttribute("cy", this.info.cy);
+			document.getElementById("svg").setAttribute("width",document.body.clientWidth);
+			document.getElementById("svg").setAttribute("height",document.body.clientHeight);
 		}
 
 		//creates the SVG element and returns it
@@ -93,12 +96,13 @@
 	}
 
 	var playground = new PlayGround();
-	setInterval(playground.loop, 15);
+	setInterval(playground.loop, 10);
 
 	document.onclick = function(e) {
+		console.log("Mouse postion on click: " + e.x,e.y);
 		playground.createNewCircle(e.x,e.y);
 	}
-	
+
 	</script>
 
 </body>
